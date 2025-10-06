@@ -2,8 +2,9 @@
 
 ## Description
 
-Application de gestion et vente de véhicules d'occasion.  
-Le concept : acheter des voitures aux enchères, les réparer, puis les revendre avec un petit bénéfice. Le prix de vente est calculé en ajoutant 500 € au prix d’achat et au coût des réparations. L’objectif est de générer un profit grâce à un volume de ventes suffisant.
+Application de gestion et vente de véhicules d'occasions.  
+Le concept : Les voitures sont achetées aux enchères, réparées, puis elles paraissent sur le site web sous forme d'annonces pour y être vendus.
+
 
 ## Fonctionnalités
 
@@ -16,7 +17,7 @@ Le concept : acheter des voitures aux enchères, les réparer, puis les revendre a
 
 - **Visualisation** : tout le monde peut voir les informations.
 - **Édition** : seul le propriétaire peut modifier les informations.
-- Les bonnes pratiques de sécurité doivent être suivies pour protéger le site.
+- Développement suivant les bonnes pratiques de sécurité pour protéger le site.
 
 ## Design et cohérence
 
