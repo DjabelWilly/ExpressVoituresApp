@@ -1,0 +1,90 @@
+﻿using ExpressVoituresApp.Data;
+using ExpressVoituresApp.Models.Entities;
+using ExpressVoituresApp.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
+
+namespace ExpressVoituresApp.Models.Repositories
+{
+    public class VehiculeRepository : IVehiculeRepository
+    {
+        private readonly ApplicationDbContext _context;
+
+        public VehiculeRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<IEnumerable<VehiculeAchatViewModel>> GetVehiculesAsync()
+        {
+            return await _context.Vehicules
+                .Include(v => v.Achat)
+                .Include(v => v.Annonce)
+                .Select(v => new VehiculeAchatViewModel
+                {
+                    Vehicule = new VehiculeViewModel
+                    {
+                        Id = v.Id,
+                        CodeVin = v.CodeVin,
+                        Marque = v.Marque,
+                        Modele = v.Modele,
+                        Finition = v.Finition,
+                        Annee = v.Annee
+                    },
+
+                    Achat = v.Achat != null ? new AchatViewModel
+                    {
+                        Date = v.Achat.Date,
+                        Prix = v.Achat.Prix
+                    } : null!,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<VehiculeAchatViewModel>> GetVehiculesWithoutAnnonceAsync()
+        {
+            return await _context.Vehicules
+                .Include(v => v.Achat)
+                .Include(v => v.Annonce)
+                .Where(v => v.Annonce == null)
+                .Select(v => new VehiculeAchatViewModel
+                {
+                    Vehicule = new VehiculeViewModel
+                    {
+                        Id = v.Id,
+                        CodeVin = v.CodeVin,
+                        Marque = v.Marque,
+                        Modele = v.Modele,
+                        Finition = v.Finition,
+                        Annee = v.Annee
+                    }
+                })
+                .ToListAsync();
+        }
+
+
+        public async Task<Vehicule> GetVehiculeByIdAsync(int id)
+        {
+            return await _context.Vehicules
+                .Include(v => v.Annonce)
+                .Include(v => v.Achat)
+                .Include(v => v.Vente)
+                .Include(v => v.Reparations)
+                .FirstAsync(v => v.Id == id);
+        }
+
+        public async Task DeleteVehiculeAsync(int id)
+        {
+            var vehicule = await _context.Vehicules.FindAsync(id);
+
+            _context.Vehicules.Remove(vehicule);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+
+
+    }
+}

@@ -1,0 +1,187 @@
+﻿@model ExpressVoituresApp.Models.ViewModels.VehiculeAchatViewModel
+
+@{
+    ViewData["Title"] = "Ajouter un nouveau véhicule";
+}
+
+<h1 class="mb-4">Ajouter un nouveau véhicule dans l'inventaire</h1>
+
+<div class="container">
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <!-- Colonne Véhicule -->
+            <div class="col-md-6">
+                <h4>Véhicule</h4>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Vehicule.CodeVin"></label>
+                    <input asp-for="Vehicule.CodeVin"
+                           class="form-control text-uppercase"
+                           style="text-transform: uppercase"
+                           oninput="this.value = this.value.toUpperCase();" />
+                    <span asp-validation-for="Vehicule.CodeVin" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Vehicule.Marque"></label>
+                    <select asp-for="Vehicule.Marque" id="Marque" class="form-select">
+                        <option value="">-- Sélectionnez une marque --</option>
+                        @* Génération dynamique depuis modelesParMarque *@
+                        @{
+                            var marques = new string[]
+                            {
+                                                "Alfa Romeo","Alpine","Aston Martin","Audi","BMW","BYD","Cadillac","Chevrolet-Daewoo",
+                                                "Chrysler","Citroën","Cupra","Dacia","Daihatsu","Dodge","DS","Fiat","Ford","Fuso",
+                                                "Honda","Hyundai","Infiniti","Isuzu","Iveco","Jaguar","Jeep","Kia","Lada","Lancia",
+                                                "Land Rover","Lexus","Lynk & Co","Mazda","Mercedes-Benz","MG","MG (Rover)","MINI",
+                                                "Mitsubishi","Nissan","Opel","Peugeot","Polestar","Porsche","Renault","Saab","Seat",
+                                                "Skoda","Smart","Ssangyong","Subaru","Suzuki","Talbot / Simca","Tesla","Toyota",
+                                                "Volkswagen","Volvo"
+                            };
+                        }
+                        @foreach (var marque in marques)
+                        {
+                            <option value="@marque">@marque</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Vehicule.Marque" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Vehicule.Modele"></label>
+                    <select asp-for="Vehicule.Modele" id="Modele" class="form-select">
+                        <option value="">-- Sélectionnez un modèle --</option>
+                    </select>
+                    <span asp-validation-for="Vehicule.Modele" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Vehicule.Finition"></label>
+                    <input asp-for="Vehicule.Finition" class="form-control" />
+                    <span asp-validation-for="Vehicule.Finition" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Vehicule.Annee"></label>
+                    <select asp-for="Vehicule.Annee" class="form-select">
+                        <option value="">-- Sélectionnez une année --</option>
+                        @{
+                            int anneeMax = DateTime.Now.Year;
+                            for (int annee = 1990; annee <= anneeMax; annee++)
+                            {
+                                <option value="@annee">@annee</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="Vehicule.Annee" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <!-- Colonne Achat -->
+            <div class="col-md-6">
+                <h4>Achat</h4>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Achat.Date"></label>
+                    <input asp-for="Achat.Date" type="date" class="form-control"/>
+                    <span asp-validation-for="Achat.Date" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Achat.Prix"></label>
+                    <input asp-for="Achat.Prix" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="Achat.Prix" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+                const modelesParMarque = {
+            "Alfa Romeo": ["Giulia", "Stelvio", "Tonale", "MiTo"],
+            "Alpine": ["A110"],
+            "Aston Martin": ["Vantage", "DB11", "DBX", "DB12"],
+            "Audi": ["A1", "A3", "A4", "A6", "Q3", "Q5", "Q7"],
+            "BMW": ["Série 1", "Série 3", "Série 5", "X1", "X3", "X5"],
+            "BYD": ["Atto 3", "Dolphin", "Seal", "Tang"],
+            "Cadillac": ["Escalade", "XT5", "CT5"],
+            "Chevrolet-Daewoo": ["Cruze", "Aveo", "Captiva", "Spark"],
+            "Chrysler": ["300C", "Voyager", "Pacifica"],
+            "Citroën": ["C1", "C3", "C4", "C5 Aircross"],
+            "Cupra": ["Formentor", "Leon", "Born", "Ateca"],
+            "Dacia": ["Sandero", "Duster", "Jogger", "Spring"],
+            "Daihatsu": ["Sirion", "Terios", "Charade"],
+            "Dodge": ["Challenger", "Charger", "Durango"],
+            "DS": ["DS 3", "DS 4", "DS 7"],
+            "Fiat": ["500", "Panda", "Tipo", "500X"],
+            "Ford": ["Fiesta", "Focus", "Puma", "Kuga", "Transit"],
+            "Fuso": ["Canter"],
+            "Honda": ["Civic", "Jazz", "HR-V", "CR-V"],
+            "Hyundai": ["i10", "i20", "i30", "Kona", "Tucson", "Santa Fe"],
+            "Infiniti": ["Q30", "Q50", "QX50"],
+            "Isuzu": ["D-Max"],
+            "Iveco": ["Daily"],
+            "Jaguar": ["XE", "XF", "F-Pace", "I-Pace"],
+            "Jeep": ["Renegade", "Compass", "Cherokee", "Wrangler"],
+            "Kia": ["Picanto", "Rio", "Ceed", "Sportage", "Niro", "EV6"],
+            "Lada": ["Niva", "Vesta", "Granta"],
+            "Lancia": ["Ypsilon", "Delta"],
+            "Land Rover": ["Defender", "Discovery", "Range Rover", "Evoque"],
+            "Lexus": ["CT", "NX", "RX", "UX"],
+            "Lynk & Co": ["01", "02", "03"],
+            "Mazda": ["2", "3", "CX-30", "CX-5", "MX-5"],
+            "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLA", "GLC"],
+            "MG": ["ZS", "HS", "MG4", "MG5 EV"],
+            "MG (Rover)": ["ZR", "ZT", "TF"],
+            "MINI": ["3 Door", "5 Door", "Clubman", "Countryman", "Electric"],
+            "Mitsubishi": ["Space Star", "ASX", "Eclipse Cross", "Outlander"],
+            "Nissan": ["Micra", "Qashqai", "Juke", "X-Trail", "Leaf"],
+            "Opel": ["Corsa", "Astra", "Mokka", "Grandland"],
+            "Peugeot": ["206", "207", "208", "307", "308", "2008", "3008", "5008"],
+            "Polestar": ["2", "3", "4"],
+            "Porsche": ["911", "Cayenne", "Macan", "Taycan"],
+            "Renault": ["Clio", "Megane", "Twingo", "Captur", "Kadjar"],
+            "Saab": ["9-3", "9-5"],
+            "Seat": ["Ibiza", "Leon", "Arona", "Ateca"],
+            "Skoda": ["Fabia", "Octavia", "Kamiq", "Karoq", "Superb"],
+            "Smart": ["Fortwo", "Forfour", "Hashtag One"],
+            "Ssangyong": ["Tivoli", "Korando", "Rexton"],
+            "Subaru": ["Impreza", "Forester", "Outback", "XV"],
+            "Suzuki": ["Swift", "Ignis", "Vitara", "S-Cross"],
+            "Talbot / Simca": ["Horizon", "Samba", "Solara"],
+            "Tesla": ["Model 3", "Model Y", "Model S", "Model X"],
+            "Toyota": ["Yaris", "Corolla", "RAV4", "C-HR", "Auris"],
+            "Volkswagen": ["Polo", "Golf", "Passat", "Tiguan", "T-Roc"],
+            "Volvo": ["XC40", "XC60", "S60", "V60", "EX30"]
+        };
+
+
+        document.getElementById("Marque").addEventListener("change", function () {
+            const marque = this.value;
+            const modeleSelect = document.getElementById("Modele");
+
+            // Réinitialiser la liste des modèles
+            modeleSelect.innerHTML = '<option value="">-- Sélectionnez un modèle --</option>';
+
+            // Ajouter les modèles correspondants
+            if (modelesParMarque[marque]) {
+                modelesParMarque[marque].forEach(modele => {
+                    const opt = document.createElement("option");
+                    opt.value = modele;
+                    opt.textContent = modele;
+                    modeleSelect.appendChild(opt);
+                });
+            }
+        });
+    </script>
+}

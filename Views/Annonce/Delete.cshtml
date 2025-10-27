@@ -1,0 +1,19 @@
+﻿@model ExpressVoituresApp.Models.Entities.Annonce
+
+@{
+    ViewData["Title"] = "Supprimer une annonce";
+}
+
+<h1>Voulez-vous supprimer cette annonce ?</h1>
+
+<div class="alert alert-warning">
+    <p><strong>Titre :</strong> @Model.Titre</p>
+    <p><strong>Description :</strong> @Model.Description</p>
+    <p><strong>Statut :</strong> @Model.Statut</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+</form>

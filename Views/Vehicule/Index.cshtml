@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ExpressVoituresApp.Models.ViewModels.VehiculeAchatViewModel>
+
+@{
+    ViewData["Title"] = "Véhicules";
+}
+
+<h1>Liste des véhicules</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code VIN</th>
+            <th>Marque</th>
+            <th>Modèle</th>
+            <th>Finition</th>
+            <th>Année</th>
+            <th>Date d'achat</th>
+            <th>Prix d'achat</th>
+            <th>Statut annonce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Vehicule.CodeVin</td>
+                <td>@v.Vehicule.Marque</td>
+                <td>@v.Vehicule.Modele</td>
+                <td>@v.Vehicule.Finition</td>
+                <td>@v.Vehicule.Annee</td>
+                <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
+                <td>@v.Achat?.Prix</td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@v.Vehicule.Id"
+                       class="btn btn-danger btn-sm">
+                        Supprimer
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* message de succès après enregistrement d'un véhicule *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="flashMessage" class="alert alert-success" style="
+                    position: fixed;
+                    top: 70px;
+                    right: 20px;
+                    min-width: 200px;
+                    z-index: 1050;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                ">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@section Scripts {
+    <script>
+        // Supprime le message après 3 secondes
+        const flash = document.getElementById("flashMessage");
+        if(flash) {
+            setTimeout(() => {
+                flash.style.transition = "opacity 0.5s ease";
+                flash.style.opacity = "0";
+                setTimeout(() => flash.remove(), 500);
+            }, 3000);
+        }
+    </script>
+}
+
+

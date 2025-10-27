@@ -1,0 +1,26 @@
+﻿@model ExpressVoituresApp.Models.ViewModels.VehiculeAchatViewModel
+
+@{
+    ViewData["Title"] = "Supprimer un véhicule";
+}
+
+<h1>Voulez-vous supprimer ce véhicule ?</h1>
+
+<div class="alert alert-warning">
+    <p><strong>Code VIN :</strong> @Model.Vehicule.CodeVin</p>
+    <p><strong>Marque :</strong> @Model.Vehicule.Marque</p>
+    <p><strong>Modèle :</strong> @Model.Vehicule.Modele</p>
+    <p><strong>Finition :</strong> @Model.Vehicule.Finition</p>
+    <p><strong>Année :</strong> @Model.Vehicule.Annee</p>
+    @if (Model.Achat != null)
+    {
+        <p><strong>Date d'achat :</strong> @Model.Achat.Date.ToString("dd/MM/yyyy")</p>
+        <p><strong>Prix :</strong> @Model.Achat.Prix</p>
+    }
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Vehicule.Id" />
+    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+</form>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ExpressVoituresApp.Models;
+using ExpressVoituresApp.Models.Entities;
 
 namespace ExpressVoituresApp.Data
 {

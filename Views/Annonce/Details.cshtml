@@ -1,0 +1,28 @@
+﻿@* @model ExpressVoituresApp.Models.Entities.Annonce
+
+@{
+    ViewData["Title"] = "Détails de l'annonce";
+}
+
+<h1>@Model.Titre</h1>
+
+<div>
+    <p><strong>Description :</strong> @Model.Description</p>
+    <p><strong>Statut :</strong> @Model.Statut</p>
+    <p><strong>Véhicule :</strong> @Model.Vehicule?.Marque @Model.Vehicule?.Modele (@Model.Vehicule?.Annee)</p>
+
+    @if (!string.IsNullOrEmpty(Model.Photo))
+    {
+        <img src="@Model.Photo" alt="@Model.Titre" style="max-width:400px;" />
+    }
+</div>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <form asp-action="MarquerCommeVendue" asp-route-id="@Model.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-success">Marquer comme vendue</button>
+        </form>
+    }
+</p> *@

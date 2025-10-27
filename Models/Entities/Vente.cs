@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpressVoituresApp.Models
+namespace ExpressVoituresApp.Models.Entities
 {
-    public class Achat
+    public class Vente
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "La date est requise")] 
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "Le prix d'achat est requis")]
+        public DateTime DateDisponibilite { get; set; }
+
         [Precision(10, 2)]
         public decimal Prix { get; set; }
 

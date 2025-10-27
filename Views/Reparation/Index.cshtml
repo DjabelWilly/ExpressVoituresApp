@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ExpressVoituresApp.Models.VehiculeReparationViewModel>
+
+
+@{
+    ViewData["Title"] = "Réparations";
+}
+
+<h1 class="mb-4">Réparations des véhicules</h1>
+
+<a asp-action="Create"
+   class="btn btn-warning mt-2">
+    Enregistrer une réparation
+</a>
+
+@if (!Model.Any())
+{
+    <div class="alert text-center">
+        Aucune réparation trouvée.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+
+                <h5 class="card-title">@item.Vehicule?.Marque @item.Vehicule?.Modele @item.Vehicule?.Annee</h5>
+                <p class="card-text text-truncate">@item.Reparation.Description</p>
+
+                <p class="text-muted mb-1">
+                    <strong>Montant réparations :</strong> @item.Reparation.Cout
+                </p>
+
+
+                {
+                @* <div>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm me-1">
+                                    Modifier
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                    Supprimer
+                                </a>
+                  </div> *@
+                }
+            </div>
+
+        }
+    </div>
+}

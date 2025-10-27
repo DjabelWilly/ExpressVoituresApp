@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ExpressVoituresApp.Models.Entities;
 
 namespace ExpressVoituresApp.Models
 {
-    public class Annonce
+    public class AnnonceViewModel
     {
         public int Id { get; set; }
 
@@ -14,11 +15,12 @@ namespace ExpressVoituresApp.Models
 
         public string? Photo { get; set; }
 
-        [Required(ErrorMessage = "Le statut est requis")]
-        public required string Statut { get; set; }
+        public string? Statut { get; set; }
 
-        // FK
+        [Required(ErrorMessage = "Un véhicule est requis")]
         public int VehiculeId { get; set; }
-        public required Vehicule Vehicule { get; set; }
+
+        // Liste pour le menu déroulant
+        public IEnumerable<Vehicule>? Vehicules { get; set; }
     }
 }

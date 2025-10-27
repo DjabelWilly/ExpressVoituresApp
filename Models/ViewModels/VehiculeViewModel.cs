@@ -2,7 +2,7 @@
 
 namespace ExpressVoituresApp.Models
 {
-    public class Vehicule
+    public class VehiculeViewModel
     {
         public int Id { get; set; }
 
@@ -20,10 +20,5 @@ namespace ExpressVoituresApp.Models
         [Required(ErrorMessage = "L'année est requise")]
         public int Annee { get; set; }
 
-        // Relations
-        public required Achat Achat { get; set; }
-        public required Vente Vente { get; set; }
-        public required Annonce Annonce { get; set; }
-        public ICollection<Reparation> Reparations { get; set; } = new List<Reparation>();
     }
 }
