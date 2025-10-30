@@ -20,7 +20,7 @@ else
             <div class="col">
                 <div class="card h-100">
                     <div class="row g-0 h-100">
-                        <div class="col-md-4">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="col-md-5">
                             @if (!string.IsNullOrEmpty(item.Photo))
                             {
                                 <img src="@item.Photo" class="img-fluid rounded-start h-100 w-100 object-fit-cover" alt="@item.Titre">
@@ -31,11 +31,11 @@ else
                                     <span class="text-muted">Aucune image</span>
                                 </div>
                             }
-                        </div>
+                        </a>
 
-                        <div class="col-md-8 d-flex flex-column">
+                        <div class="col-md-7 d-flex flex-column">
                             <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none text-dark flex-grow-1">
-                                <div class="card-body px-3 py-1">
+                                <div class="card-body ps-3 pe-2 py-2">
                                     <h4 class="text-end mb-0">@item.Prix €</h4>
                                     <h5 class="card-title">@item.Titre</h5>
                                     <p class="card-text text-truncate mb-1">@item.Description</p>
@@ -48,7 +48,7 @@ else
 
                             @if (User.Identity?.IsAuthenticated ?? false)
                             {
-                                <div class="card-footer bg-transparent border-0 text-end">
+                                <div class="card-footer bg-transparent border-0 text-end p-2">
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-dark me-1">Modifier</a>
                                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Supprimer</a>
                                 </div>

@@ -43,7 +43,6 @@ namespace ExpressVoituresApp.Controllers
             return View(new VehiculeReparationViewModel());
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VehiculeReparationViewModel model)
