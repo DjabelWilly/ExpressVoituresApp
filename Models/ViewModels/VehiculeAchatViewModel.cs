@@ -4,7 +4,7 @@
     {
         public VehiculeViewModel Vehicule { get; set; } = null!;
         public AchatViewModel Achat { get; set; } = null!;
-        public AnnonceViewModel? Annonce { get; set; } = null !;
+        public AnnonceViewModel? Annonce { get; set; }
     }
 
 }

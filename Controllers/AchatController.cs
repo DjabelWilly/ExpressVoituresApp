@@ -22,6 +22,7 @@ namespace ExpressVoituresApp.Controllers
             return View();
         }
 
+        // Créer un nouveau véhicule dans la db
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]

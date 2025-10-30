@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Charge le fichier .env
 Env.Load();
 
-// --- Connexion à la base ---
+// --- Connexion ï¿½ la base ---
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// --- Configuration Identity + rôles ---
+// --- Configuration Identity + rï¿½les ---
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
@@ -52,7 +52,7 @@ builder.Services.AddScoped<IReparationService, ReparationService>();
 
 var app = builder.Build();
 
-// --- Initialisation du rôle Admin au démarrage ---
+// --- Initialisation du rï¿½le Admin au dï¿½marrage ---
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -60,16 +60,16 @@ using (var scope = app.Services.CreateScope())
 
     const string adminRole = "Admin";
 
-    // --- Récupère variables d'environnement ---
+    // --- Rï¿½cupï¿½re variables d'environnement ---
     var adminEmail = Environment.GetEnvironmentVariable("AdminEmail") ?? "admin@expressvoitures.com";
     var adminPassword = Environment.GetEnvironmentVariable("AdminPassword")
         ?? throw new InvalidOperationException("AdminPassword not set.");
 
-    // --- Créer rôle si inexistant ---
+    // --- Crï¿½er rï¿½le si inexistant ---
     if (!await roleManager.RoleExistsAsync(adminRole))
         await roleManager.CreateAsync(new IdentityRole(adminRole));
 
-    // --- Créer utilisateur admin si inexistant ---
+    // --- Crï¿½er utilisateur admin si inexistant ---
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     if (adminUser == null)
     {

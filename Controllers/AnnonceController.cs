@@ -21,6 +21,8 @@ namespace ExpressVoituresApp.Controllers
         // ==========================
         // VISITEURS PUBLICS
         // ==========================
+
+        //----------------READ----------------//
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
@@ -56,7 +58,7 @@ namespace ExpressVoituresApp.Controllers
 
             return View();
         }
-
+        //-------------CREATE--------------//
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -64,24 +66,36 @@ namespace ExpressVoituresApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var vehicules = await _vehiculeService.GetVehiculesWithoutAnnonceAsync();
-                ViewBag.Vehicules = new SelectList(
-                    vehicules.Select(v => new
-                    {
-                        v.Vehicule.Id,
-                        Display = $"{v.Vehicule.Marque} {v.Vehicule.Modele} ({v.Vehicule.Annee})"
-                    }),
-                    "Id", "Display"
-                );
                 return View(model);
+            }
+
+            string? photoPath = null;
+
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(uploadsDir))
+                    Directory.CreateDirectory(uploadsDir);
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(model.ImageFile.FileName);
+                var filePath = Path.Combine(uploadsDir, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ImageFile.CopyToAsync(stream);
+                }
+
+                // chemin relatif pour l’affichage dans <img src="">
+                photoPath = "/images/" + fileName;
             }
 
             var annonce = new Annonce
             {
                 Titre = model.Titre,
                 Description = model.Description,
-                Photo = model.Photo,
+                Photo = photoPath, // <-- enregistre le chemin relatif
                 Statut = "DISPONIBLE",
+                Prix = model.Prix,
                 VehiculeId = model.VehiculeId
             };
 
@@ -90,6 +104,8 @@ namespace ExpressVoituresApp.Controllers
         }
 
 
+        //-------------UPDATE--------------//
+        
         // Récupère l'annonce à modifier
         [Authorize]
         public async Task<IActionResult> Edit(int id)
@@ -104,6 +120,7 @@ namespace ExpressVoituresApp.Controllers
                 Description = annonce.Description,
                 Photo = annonce.Photo,
                 Statut = annonce.Statut,
+                Prix = annonce.Prix,
                 VehiculeId = annonce.VehiculeId
             };
 
@@ -119,16 +136,47 @@ namespace ExpressVoituresApp.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var annonce = await _annonceService.GetByIdAsync(model.Id);
+
             if (annonce == null) return NotFound();
 
+            // Traitement du remplacement d’image
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(uploadsDir))
+                    Directory.CreateDirectory(uploadsDir);
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(model.ImageFile.FileName);
+                var filePath = Path.Combine(uploadsDir, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ImageFile.CopyToAsync(stream);
+                }
+
+                // Supprime l’ancienne image si elle existe
+                if (!string.IsNullOrEmpty(annonce.Photo))
+                {
+                    var oldPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", annonce.Photo.TrimStart('/'));
+                    if (System.IO.File.Exists(oldPath))
+                        System.IO.File.Delete(oldPath);
+                }
+
+                annonce.Photo = "/images/" + fileName;
+            }
+
+            // Mise à jour des autres champs
             annonce.Titre = model.Titre;
             annonce.Description = model.Description;
-            annonce.Photo = model.Photo;
             annonce.Statut = model.Statut;
+            annonce.Prix = model.Prix;
 
             await _annonceService.UpdateAnnonceAsync(annonce);
             return RedirectToAction(nameof(Index));
         }
+
+
+        //----------------DELETE-------------------//
 
         // Récupère une annonce et la supprime
         [Authorize]

@@ -5,7 +5,7 @@ namespace ExpressVoituresApp.Models
 {
     public class VehiculeReparationViewModel
     {
-        public VehiculeViewModel Vehicule { get; set; } = null!;
+        public VehiculeViewModel? Vehicule { get; set; }
 
         public ReparationViewModel Reparation { get; set; } = null!;
     

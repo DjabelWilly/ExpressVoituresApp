@@ -16,7 +16,7 @@
             <th>Année</th>
             <th>Date d'achat</th>
             <th>Prix d'achat</th>
-            <th>Statut annonce</th>
+            <th>Statut</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +30,16 @@
                 <td>@v.Vehicule.Annee</td>
                 <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
                 <td>@v.Achat?.Prix</td>
+                <td>
+                    @if (v.Annonce == null)
+                    {
+                        <span class="text-secondary">Non publiée</span>
+                    }
+                    else
+                    {
+                        <span>@v.Annonce.Statut</span>
+                    }
+                </td>
                 <td>
                     <a asp-action="Delete"
                        asp-route-id="@v.Vehicule.Id"
@@ -47,13 +57,13 @@
 @if (TempData["SuccessMessage"] != null)
 {
     <div id="flashMessage" class="alert alert-success" style="
-                    position: fixed;
-                    top: 70px;
-                    right: 20px;
-                    min-width: 200px;
-                    z-index: 1050;
-                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-                ">
+                        position: fixed;
+                        top: 70px;
+                        right: 20px;
+                        min-width: 200px;
+                        z-index: 1050;
+                        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                    ">
         @TempData["SuccessMessage"]
     </div>
 }

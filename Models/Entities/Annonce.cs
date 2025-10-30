@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpressVoituresApp.Models.Entities
 {
@@ -13,6 +14,8 @@ namespace ExpressVoituresApp.Models.Entities
         public string? Photo { get; set; }
 
         public string? Statut { get; set; }
+
+        public int Prix { get; set; }
 
         // FK
         public int VehiculeId { get; set; }

@@ -1,22 +1,87 @@
 html {
-  font-size: 14px;
+    font-size: 16px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 18px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    color: black;
+    margin-bottom: 60px;
+    font-family: 'Times New Roman', Times, serif;
 }
+
+.login_button,
+.btn-cars {
+    background-color: #d9a963;
+    color: #1f2020;
+    border: 1px solid #d9a963;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+    .login_button:hover,
+    .btn-cars:hover {
+        background-color: #b6935a;
+        color: #ffff;
+        border-color: #b6935a;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .login_button:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+.form-label {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: #424242;
+}
+
+a.navbar-brand {
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 24px;
+}
+
+.navbar .nav-link {
+    transition: all 0.2s ease-in-out;
+}
+
+    .navbar .nav-link:hover {
+        text-shadow: 0 0 1px rgba(0,0,0,0.5);
+        color: #d9a963;
+    }
+
+h1 {
+    color: #786258;
+}
+
+.hover-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .hover-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+    }

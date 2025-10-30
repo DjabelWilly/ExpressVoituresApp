@@ -12,8 +12,8 @@ namespace ExpressVoituresApp.Models
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Le prix d'achat est requis")]
-        [Range(0.01, 1000000, ErrorMessage = "Le prix doit être positif")]
-        public decimal Prix { get; set; }
+        [Range(1, 1000000, ErrorMessage = "Le prix doit être positif")]
+        public int Prix { get; set; }
 
         // Validation personnalisée : date d'achat entre 1990 et aujourd'hui
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

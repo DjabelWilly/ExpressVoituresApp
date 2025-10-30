@@ -35,8 +35,17 @@ namespace ExpressVoituresApp.Models.Repositories
                         Date = v.Achat.Date,
                         Prix = v.Achat.Prix
                     } : null!,
+
+                    Annonce = v.Annonce != null ? new AnnonceViewModel
+                    {
+                        Id = v.Annonce.Id,
+                        Titre = v.Annonce.Titre,
+                        Description = v.Annonce.Description,
+                        Statut = v.Annonce.Statut,
+                        Prix = v.Annonce.Prix
+                    } : null!
                 })
-                .ToListAsync();
+        .ToListAsync();
         }
 
         public async Task<IEnumerable<VehiculeAchatViewModel>> GetVehiculesWithoutAnnonceAsync()

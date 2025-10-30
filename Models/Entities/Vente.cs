@@ -9,10 +9,7 @@ namespace ExpressVoituresApp.Models.Entities
 
         public DateTime Date { get; set; }
 
-        public DateTime DateDisponibilite { get; set; }
-
-        [Precision(10, 2)]
-        public decimal Prix { get; set; }
+        public int Prix { get; set; }
 
         // FK
         public int VehiculeId { get; set; }

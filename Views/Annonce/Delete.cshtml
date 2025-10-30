@@ -6,14 +6,45 @@
 
 <h1>Voulez-vous supprimer cette annonce ?</h1>
 
-<div class="alert alert-warning">
-    <p><strong>Titre :</strong> @Model.Titre</p>
-    <p><strong>Description :</strong> @Model.Description</p>
-    <p><strong>Statut :</strong> @Model.Statut</p>
+<div class="row row-cols-1">
+    <div class="col">
+        <div class="card h-100 mt-3">
+            <div class="row g-0 h-100">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.Photo))
+                    {
+                        <img src="@Model.Photo"
+                             class="img-fluid rounded-start h-100 w-100 object-fit-cover"
+                             alt="@Model.Titre">
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center justify-content-center bg-light h-100">
+                            <span class="text-muted">Aucune image</span>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="text-end">@Model.Prix €</h4>
+                        <h5 class="card-title">@Model.Titre</h5>
+                        <p class="card-text text-truncate">@Model.Description</p>
+                        <p>@Model.Vehicule?.Annee</p>
+                        <p>@Model.Vehicule?.Marque</p>
+                        <p>@Model.Vehicule?.Modele</p>
+                        <p>@Model.Vehicule?.Finition</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
-    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-danger mt-4">Confirmer la suppression</button>
+    <a asp-action="Index" class="btn btn-secondary mt-4">Annuler</a>
 </form>

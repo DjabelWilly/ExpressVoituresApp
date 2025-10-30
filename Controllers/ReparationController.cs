@@ -32,7 +32,7 @@ namespace ExpressVoituresApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var vehicules = await _vehiculeService.GetVehiculesAsync(); // récupère tous les véhicules
+            var vehicules = await _vehiculeService.GetVehiculesAsync();
             ViewBag.Vehicules = vehicules
                 .Select(v => new SelectListItem
                 {
@@ -48,34 +48,29 @@ namespace ExpressVoituresApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VehiculeReparationViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                // re-remplir la liste des véhicules pour la vue
-                var vehicules = await _vehiculeService.GetVehiculesAsync();
-                ViewBag.Vehicules = vehicules
-                    .Select(v => new SelectListItem
-                    {
-                        Value = v.Vehicule.Id.ToString(),
-                        Text = $"{v.Vehicule.Marque} {v.Vehicule.Modele} ({v.Vehicule.Annee})"
-                    }).ToList();
+            var vehicules = await _vehiculeService.GetVehiculesAsync();
+            ViewBag.Vehicules = vehicules
+                .Select(v => new SelectListItem
+                {
+                    Value = v.Vehicule.Id.ToString(),
+                    Text = $"{v.Vehicule.Marque} {v.Vehicule.Modele} ({v.Vehicule.Annee})"
+                }).ToList();
 
-                return View(model);
+            if (ModelState.IsValid)
+            {
+                var reparation = new Reparation
+                {
+                    Description = model.Reparation.Description,
+                    Cout = model.Reparation.Cout,
+                    VehiculeId = model.Reparation.VehiculeId
+                };
+
+                await _reparationService.AddReparationAsync(reparation);
+                return RedirectToAction(nameof(Index));
             }
 
-            // créer l'entité Reparation
-            var reparation = new Reparation
-            {
-                Description = model.Reparation.Description,
-                Cout = model.Reparation.Cout,
-                VehiculeId = model.Vehicule.Id
-            };
-
-            await _reparationService.AddReparationAsync(reparation);
-
-            return RedirectToAction(nameof(Index));
+            return View(model);
         }
-
-
 
     }
 }

@@ -15,7 +15,12 @@ namespace ExpressVoituresApp.Models
 
         public string? Photo { get; set; }
 
+        public IFormFile? ImageFile { get; set; }
+
         public string? Statut { get; set; }
+
+        [Required(ErrorMessage = "Le prix est requis")]
+        public int Prix { get; set; }
 
         [Required(ErrorMessage = "Un véhicule est requis")]
         public int VehiculeId { get; set; }

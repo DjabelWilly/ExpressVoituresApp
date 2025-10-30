@@ -20,12 +20,13 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Vehicule.Id" class="form-label">Véhicule</label>
-        <select asp-for="Vehicule.Id" asp-items="ViewBag.Vehicules" class="form-select">
+        <label asp-for="Reparation.VehiculeId" class="form-label">Véhicule</label>
+        <select asp-for="Reparation.VehiculeId" asp-items="ViewBag.Vehicules" class="form-select">
             <option value="">-- Sélectionnez un véhicule --</option>
         </select>
-        <span asp-validation-for="Vehicule.Id" class="text-danger"></span>
+        <span asp-validation-for="Reparation.VehiculeId" class="text-danger"></span>
     </div>
+
 
     <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>

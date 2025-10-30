@@ -4,35 +4,7 @@
     ViewData["Title"] = "Annonces";
 }
 
-@* message de succès après enregistrement d'un véhicule *@
-@if (TempData["SuccessMessage"] != null)
-{
-    <div id="flashMessage" class="alert alert-success" style="
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            min-width: 200px;
-            z-index: 1050;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        ">
-        @TempData["SuccessMessage"]
-    </div>
-}
-@section Scripts {
-    <script>
-        // Supprime le message après 3 secondes
-        const flash = document.getElementById("flashMessage");
-        if(flash) {
-            setTimeout(() => {
-                flash.style.transition = "opacity 0.5s ease";
-                flash.style.opacity = "0";
-                setTimeout(() => flash.remove(), 500);
-            }, 3000);
-        }
-    </script>
-}
-
-<h1 class="mb-4 text-center">Liste des véhicules disponibles</h1>
+<h1 class="mb-4 text-center fst-italic">Nos voitures</h1>
 
 @if (!Model.Any())
 {
@@ -42,49 +14,46 @@
 }
 else
 {
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 g-4">
         @foreach (var item in Model)
         {
             <div class="col">
-                <div class="card h-100 shadow-sm border-0">
-                    @if (!string.IsNullOrEmpty(item.Photo))
-                    {
-                        <img src="@item.Photo" class="card-img-top" alt="@item.Titre" style="object-fit:cover;height:200px;">
-                    }
-                    else
-                    {
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height:200px;">
-                            <span class="text-muted">Pas d'image</span>
+                <div class="card h-100">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            @if (!string.IsNullOrEmpty(item.Photo))
+                            {
+                                <img src="@item.Photo" class="img-fluid rounded-start h-100 w-100 object-fit-cover" alt="@item.Titre">
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center justify-content-center bg-light h-100">
+                                    <span class="text-muted">Aucune image</span>
+                                </div>
+                            }
                         </div>
-                    }
 
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Titre</h5>
-                        <p class="card-text text-truncate">@item.Description</p>
+                        <div class="col-md-8 d-flex flex-column">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none text-dark flex-grow-1">
+                                <div class="card-body px-3 py-1">
+                                    <h4 class="text-end mb-0">@item.Prix €</h4>
+                                    <h5 class="card-title">@item.Titre</h5>
+                                    <p class="card-text text-truncate mb-1">@item.Description</p>
+                                    <p class="mb-1">@item.Vehicule?.Annee</p>
+                                    <p class="mb-1">@item.Vehicule?.Marque</p>
+                                    <p class="mb-1">@item.Vehicule?.Modele</p>
+                                    <p class="mb-1">@item.Vehicule?.Finition</p>
+                                </div>
+                            </a>
 
-                        <p class="text-muted mb-1">
-                            <strong>Véhicule :</strong> @item.Vehicule?.Marque @item.Vehicule?.Modele (@item.Vehicule?.Annee)
-                        </p>
-
-                        <span class="badge @(item.Statut == "DISPONIBLE" ? "bg-success" : "bg-secondary")">
-                            @item.Statut
-                        </span>
-                    </div>
-
-                    <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
-                        @* <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Détails</a> *@
-
-                        @if (User.Identity?.IsAuthenticated ?? false)
-                        {
-                            <div>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm me-1">
-                                    Modifier
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
-                                    Supprimer
-                                </a>
-                            </div>
-                        }
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                <div class="card-footer bg-transparent border-0 text-end">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-dark me-1">Modifier</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Supprimer</a>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

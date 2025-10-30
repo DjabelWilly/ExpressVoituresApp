@@ -9,36 +9,36 @@
     }
     else
     {
-        <h3 class="fw-bold display-5 mb-3">Bienvenue sur Express Voitures</h3>
-        <p class="display-6">Decouvrez tous nos véhicules d'occasions</p>
+        <h3 class="mb-3">Bienvenue sur Express Voitures</h3>
+        <p class="fs-4">Decouvrez tous nos véhicules d'occasions</p>
     }
     <div class="mt-5">
-        <a class="btn btn-primary m-2"
+        <a class="btn btn-primary m-2 btn-cars"
            asp-action="Index"
            asp-controller="Annonce">
             Voir les annonces
         </a>
         @if (User.Identity?.IsAuthenticated ?? false)
         {
-            <a class="btn btn-warning m-2"
+            <a class="btn btn-cars m-2"
                asp-action="Create"
                asp-controller="Achat">
                 + Enregistrer un nouveau véhicule
             </a>
-            <a class="btn btn-success m-2"
+            <a class="btn btn-cars m-2"
                asp-action="Create"
                asp-controller="Annonce">
                 + Publier une annonce
             </a>
-            <a class="btn btn-secondary m-2"
+            <a class="btn btn-cars m-2"
                asp-action="Index"
                asp-controller="Reparation">
                 + Réparations
             </a>
-            <a class="btn btn-info m-2"
+            <a class="btn btn-cars m-2"
                asp-action="Index"
                asp-controller="Vehicule">
-                + Voir l'inventaire véhicules
+                + Voir l'inventaire
             </a>
         }
     </div>
