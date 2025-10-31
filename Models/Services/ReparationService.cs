@@ -22,7 +22,6 @@ namespace ExpressVoituresApp.Models.Services
             return await _reparationRepository.GetReparationTotalByVehiculeIdAsync(vehiculeId);
         }
 
-
         public async Task AddReparationAsync(Reparation reparation)
         {
             await _reparationRepository.AddAsync(reparation);

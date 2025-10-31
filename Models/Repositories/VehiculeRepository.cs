@@ -13,6 +13,7 @@ namespace ExpressVoituresApp.Models.Repositories
         {
             _context = context;
         }
+
         public async Task<IEnumerable<VehiculeAchatViewModel>> GetVehiculesAsync()
         {
             return await _context.Vehicules
@@ -44,10 +45,13 @@ namespace ExpressVoituresApp.Models.Repositories
                         Description = v.Annonce.Description,
                         Statut = v.Annonce.Statut,
                         Prix = v.Annonce.Prix
-                    } : null!
+                    } : null!,
+
+                    TotalReparations = v.Reparations.Sum(r => r.Cout)
                 })
-        .ToListAsync();
+                .ToListAsync();
         }
+
 
         public async Task<IEnumerable<VehiculeAchatViewModel>> GetVehiculesWithoutAnnonceAsync()
         {

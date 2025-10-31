@@ -6,7 +6,7 @@
         public AchatViewModel Achat { get; set; } = null!;
         public AnnonceViewModel? Annonce { get; set; }
         public VenteViewModel? Vente { get; set; }
-        public VehiculeReparationViewModel? Reparation { get; set; }
+        public decimal TotalReparations { get; set; }
     }
 
 }
