@@ -18,6 +18,7 @@ namespace ExpressVoituresApp.Models.Repositories
             return await _context.Vehicules
                 .Include(v => v.Achat)
                 .Include(v => v.Annonce)
+                .Include(v => v.Reparations)
                 .Select(v => new VehiculeAchatViewModel
                 {
                     Vehicule = new VehiculeViewModel

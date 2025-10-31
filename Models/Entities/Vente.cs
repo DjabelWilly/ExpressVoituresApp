@@ -13,6 +13,6 @@ namespace ExpressVoituresApp.Models.Entities
 
         // FK
         public int VehiculeId { get; set; }
-        public required Vehicule Vehicule { get; set; }
+        public Vehicule? Vehicule { get; set; }
     }
 }

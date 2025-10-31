@@ -14,8 +14,11 @@
             <th>Modèle</th>
             <th>Finition</th>
             <th>Année</th>
-            <th>Date d'achat</th>
-            <th>Prix d'achat</th>
+            <th>Date Achat</th>
+            <th>Prix Achat</th>
+            <th>Réparations</th>
+            <th>Date Vente</th>
+            <th>Prix Vente</th>
             <th>Statut</th>
         </tr>
     </thead>
@@ -30,6 +33,9 @@
                 <td>@v.Vehicule.Annee</td>
                 <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
                 <td>@v.Achat?.Prix</td>
+                <td>@v.Reparation?.Reparation.Cout</td>
+                <td>@v.Vente?.Date.ToString("dd/MM/yyyy")</td>
+                <td>@v.Vente?.Prix</td>
                 <td>
                     @if (v.Annonce == null)
                     {
@@ -56,14 +62,7 @@
 @* message de succès après enregistrement d'un véhicule *@
 @if (TempData["SuccessMessage"] != null)
 {
-    <div id="flashMessage" class="alert alert-success" style="
-                        position: fixed;
-                        top: 70px;
-                        right: 20px;
-                        min-width: 200px;
-                        z-index: 1050;
-                        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-                    ">
+    <div id="flashMessage" class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
 }

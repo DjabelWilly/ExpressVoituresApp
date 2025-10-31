@@ -28,7 +28,27 @@ else
                 <p class="ms-2">@item.Reparation.Description</p>
                 <p class="ms-2"> @item.Reparation.Cout €</p>
             </div>
-
         }
     </div>
+}
+
+@* message de succès après enregistrement d'un véhicule *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="flashMessage" class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@section Scripts {
+    <script>
+        // Supprime le message après 3 secondes
+        const flash = document.getElementById("flashMessage");
+        if(flash) {
+            setTimeout(() => {
+                flash.style.transition = "opacity 0.5s ease";
+                flash.style.opacity = "0";
+                setTimeout(() => flash.remove(), 500);
+            }, 3000);
+        }
+    </script>
 }

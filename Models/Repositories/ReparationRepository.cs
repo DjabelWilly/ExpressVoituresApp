@@ -37,6 +37,14 @@ namespace ExpressVoituresApp.Models.Repositories
                   .ToListAsync();
         }
 
+        public async Task<decimal> GetReparationTotalByVehiculeIdAsync(int vehiculeId)
+        {
+            return await _context.Reparations
+                .Where(r => r.VehiculeId == vehiculeId)
+                .SumAsync(r => (decimal?)r.Cout) ?? 0;
+        }
+
+
         public async Task AddAsync(Reparation reparation)
         {
             _context.Reparations.Add(reparation);

@@ -1,9 +1,9 @@
 ﻿using ExpressVoituresApp.Models.Entities;
-using ExpressVoituresApp.Models.ViewModels;
+using ExpressVoituresApp.Models.Repositories;
 
-namespace ExpressVoituresApp.Models.Repositories
+namespace ExpressVoituresApp.Models.Services
 {
-    public interface IVenteRepository
+    public interface IVenteService
     {
         Task AddVenteAsync(Vente vente);
         Task<IEnumerable<Vente?>> GetVentesAsync();

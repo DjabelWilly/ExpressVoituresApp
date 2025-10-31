@@ -29,6 +29,8 @@ namespace ExpressVoituresApp.Controllers
             return View(model);
         }
 
+
+        // -------- Création new Réparation --------- //
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -65,6 +67,9 @@ namespace ExpressVoituresApp.Controllers
                 };
 
                 await _reparationService.AddReparationAsync(reparation);
+              
+                TempData["SuccessMessage"] = "Enregistrement réussi !";
+
                 return RedirectToAction(nameof(Index));
             }
 

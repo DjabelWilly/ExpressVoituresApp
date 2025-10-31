@@ -6,6 +6,9 @@ namespace ExpressVoituresApp.Models.Services
     {
         public Task<IEnumerable<VehiculeReparationViewModel>> GetReparationsAsync();
 
+        Task<decimal> GetReparationTotalByVehiculeIdAsync(int vehiculeId);
+
+
         public Task AddReparationAsync(Reparation reparation);
     }
 }
