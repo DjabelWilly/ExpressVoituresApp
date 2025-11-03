@@ -17,8 +17,8 @@
             <th>Date Achat</th>
             <th>Prix Achat</th>
             <th>Réparations</th>
-            <th>Date Vente</th>
             <th>Prix Vente</th>
+            <th>Date Vente</th>
             <th>Statut</th>
         </tr>
     </thead>
@@ -34,8 +34,8 @@
                 <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
                 <td>@v.Achat?.Prix</td>
                 <td>@v.TotalReparations</td>
+                <td>@v.Annonce?.Prix</td>
                 <td>@v.Vente?.Date.ToString("dd/MM/yyyy")</td>
-                <td>@v.Vente?.Prix</td>
                 <td>
                     @if (v.Annonce == null)
                     {

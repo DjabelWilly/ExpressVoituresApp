@@ -24,6 +24,11 @@ namespace ExpressVoituresApp.Models.Services
 
             await _achatRepository.AddVehiculeAchatAsync(vehiculeAchat);
         }
+
+        public async Task<Achat?> GetAchatByVehiculeIdAsync(int vehiculeId)
+        {
+            return await _achatRepository.GetAchatByVehiculeIdAsync(vehiculeId);
+        }
     }
 }
 

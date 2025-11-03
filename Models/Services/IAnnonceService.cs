@@ -5,7 +5,7 @@ namespace ExpressVoituresApp.Models.Services
     public interface IAnnonceService
     {
         Task<IEnumerable<Annonce>> GetAnnoncesDisponiblesAsync();
-        Task<Annonce?> GetByIdAsync(int id);
+        Task<Annonce?> GetAnnonceByIdAsync(int id);
         Task PublishAnnonceAsync(Annonce annonce);
         Task MarkAsSoldAsync(int id);
         Task UpdateAnnonceAsync(Annonce annonce);

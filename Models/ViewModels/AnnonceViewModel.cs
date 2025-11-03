@@ -19,7 +19,6 @@ namespace ExpressVoituresApp.Models
 
         public string? Statut { get; set; }
 
-        [Required(ErrorMessage = "Le prix est requis")]
         public int Prix { get; set; }
 
         [Required(ErrorMessage = "Un véhicule est requis")]

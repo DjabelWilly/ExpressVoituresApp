@@ -11,11 +11,20 @@ namespace ExpressVoituresApp.Controllers
     {
         private readonly IAnnonceService _annonceService;
         private readonly IVehiculeService _vehiculeService;
+        private readonly IReparationService _reparationService;
+        private readonly IAchatService _achatService;
 
-        public AnnonceController(IAnnonceService annonceService, IVehiculeService vehiculeService)
+        public AnnonceController(
+            IAnnonceService annonceService,
+            IVehiculeService vehiculeService,
+            IReparationService reparationService,
+            IAchatService achatService
+            )
         {
             _annonceService = annonceService;
             _vehiculeService = vehiculeService;
+            _reparationService = reparationService;
+            _achatService = achatService;
         }
 
         // ==========================
@@ -33,7 +42,7 @@ namespace ExpressVoituresApp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var annonce = await _annonceService.GetByIdAsync(id);
+            var annonce = await _annonceService.GetAnnonceByIdAsync(id);
             if (annonce == null) return NotFound();
             return View(annonce);
         }
@@ -58,6 +67,21 @@ namespace ExpressVoituresApp.Controllers
 
             return View();
         }
+        // Retourne dynamiquement le prix calculé dans le navigateur.
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetPrixCalcule(int vehiculeId)
+        {
+            var achat = await _achatService.GetAchatByVehiculeIdAsync(vehiculeId);
+            if (achat == null) return Json(0);
+
+            var coutReparations = await _reparationService.GetReparationTotalByVehiculeIdAsync(vehiculeId);
+            var prixVente = (int)(achat.Prix + coutReparations + 500);
+
+            return Json(prixVente);
+        }
+
+
         //-------------CREATE--------------//
         [HttpPost]
         [Authorize]
@@ -89,13 +113,22 @@ namespace ExpressVoituresApp.Controllers
                 photoPath = "/images/" + fileName;
             }
 
+            // règle métier : Prix de vente = prix achat + coût réparations + 500
+            var achat = await _achatService.GetAchatByVehiculeIdAsync(model.VehiculeId);
+            if (achat == null) return View(model);
+
+            var prixAchat = achat.Prix;
+            decimal? coutReparations = await _reparationService.GetReparationTotalByVehiculeIdAsync(model.VehiculeId);
+
+            var prixVente = prixAchat + coutReparations + 500;
+
             var annonce = new Annonce
             {
                 Titre = model.Titre,
                 Description = model.Description,
                 Photo = photoPath, // <-- enregistre le chemin relatif
                 Statut = "DISPONIBLE",
-                Prix = model.Prix,
+                Prix = (int)prixVente,
                 VehiculeId = model.VehiculeId
             };
 
@@ -105,12 +138,12 @@ namespace ExpressVoituresApp.Controllers
 
 
         //-------------UPDATE--------------//
-        
+
         // Récupère l'annonce à modifier
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            var annonce = await _annonceService.GetByIdAsync(id);
+            var annonce = await _annonceService.GetAnnonceByIdAsync(id);
             if (annonce == null) return NotFound();
 
             var model = new AnnonceViewModel
@@ -135,7 +168,7 @@ namespace ExpressVoituresApp.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var annonce = await _annonceService.GetByIdAsync(model.Id);
+            var annonce = await _annonceService.GetAnnonceByIdAsync(model.Id);
 
             if (annonce == null) return NotFound();
 
@@ -182,7 +215,7 @@ namespace ExpressVoituresApp.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var annonce = await _annonceService.GetByIdAsync(id);
+            var annonce = await _annonceService.GetAnnonceByIdAsync(id);
             if (annonce == null) return NotFound();
             return View(annonce);
         }

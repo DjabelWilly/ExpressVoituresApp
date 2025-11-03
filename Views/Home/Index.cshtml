@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="d-flex flex-column align-items-center mt-5 text-center">
     @if (User.Identity?.IsAuthenticated ?? false)
     {
         <h2 class="fs-2 mb-2">Tableau de bord administrateur</h2>
@@ -12,30 +12,30 @@
         <h3 class="mb-3">Bienvenue sur Express Voitures</h3>
         <p class="fs-4">Decouvrez tous nos véhicules d'occasions</p>
     }
-    <div class="mt-5">
-        <a class="btn btn-primary m-2 btn-cars"
+    <div class="d-flex flex-column mt-5">
+        <a class="btn btn-primary m-2 btn-cars mx-auto w-100"
            asp-action="Index"
            asp-controller="Annonce">
             Voir les annonces
         </a>
         @if (User.Identity?.IsAuthenticated ?? false)
         {
-            <a class="btn btn-cars m-2"
+            <a class="btn btn-cars m-2 mx-auto w-100"
                asp-action="Create"
                asp-controller="Achat">
-                + Enregistrer un nouveau véhicule
+                + Enregistrer un véhicule
             </a>
-            <a class="btn btn-cars m-2"
+            <a class="btn btn-cars m-2 mx-auto w-100"
                asp-action="Create"
                asp-controller="Annonce">
                 + Publier une annonce
             </a>
-            <a class="btn btn-cars m-2"
+            <a class="btn btn-cars m-2 mx-auto w-100"
                asp-action="Index"
                asp-controller="Reparation">
                 + Réparations
             </a>
-            <a class="btn btn-cars m-2"
+            <a class="btn btn-cars m-2 mx-auto w-100"
                asp-action="Index"
                asp-controller="Vehicule">
                 + Voir l'inventaire

@@ -39,6 +39,14 @@ namespace ExpressVoituresApp.Models.Repositories
 
         }
 
+        public async Task<Achat?> GetAchatByVehiculeIdAsync(int vehiculeId)
+        {
+            return await _context.Achats
+                .Include(a => a.Vehicule)
+                .FirstOrDefaultAsync(a => a.VehiculeId == vehiculeId);
+        }
+
+
         public async Task<bool> IsCodeVinExistAsync(string codeVin)
         {
             return await _context.Vehicules.AnyAsync(v=> v.CodeVin.ToLower() == codeVin.ToLower());

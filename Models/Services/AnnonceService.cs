@@ -17,14 +17,13 @@ namespace ExpressVoituresApp.Models.Services
             return await _annonceRepository.GetAnnoncesDisponiblesAsync();
         }
 
-        public async Task<Annonce?> GetByIdAsync(int id)
+        public async Task<Annonce?> GetAnnonceByIdAsync(int id)
         {
             return await _annonceRepository.GetAnnonceByIdAsync(id);
         }
 
         public async Task PublishAnnonceAsync(Annonce annonce)
         {
-            // Règle métier : statut = DISPONIBLE
             annonce.Statut = "DISPONIBLE";
             await _annonceRepository.AddAnnonceAsync(annonce);
             await _annonceRepository.SaveChangesAsync();
