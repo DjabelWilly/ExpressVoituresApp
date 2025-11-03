@@ -34,7 +34,7 @@ namespace ExpressVoituresApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var vehicules = await _vehiculeService.GetVehiculesAsync();
+            var vehicules = await _vehiculeService.GetVehiculesWithoutAnnonceAsync();
             ViewBag.Vehicules = vehicules
                 .Select(v => new SelectListItem
                 {
@@ -49,7 +49,7 @@ namespace ExpressVoituresApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VehiculeReparationViewModel model)
         {
-            var vehicules = await _vehiculeService.GetVehiculesAsync();
+            var vehicules = await _vehiculeService.GetVehiculesWithoutAnnonceAsync();
             ViewBag.Vehicules = vehicules
                 .Select(v => new SelectListItem
                 {
