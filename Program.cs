@@ -42,13 +42,14 @@ builder.Services.AddScoped<IAnnonceRepository, AnnonceRepository>();
 builder.Services.AddScoped<IAchatRepository, AchatRepository>();
 builder.Services.AddScoped<IVehiculeRepository, VehiculeRepository>();
 builder.Services.AddScoped<IReparationRepository, ReparationRepository>();
+builder.Services.AddScoped<IVenteRepository, VenteRepository>();
 
 // Services
 builder.Services.AddScoped<IAnnonceService, AnnonceService>();
 builder.Services.AddScoped<IVehiculeService, VehiculeService>();
 builder.Services.AddScoped<IAchatService, AchatService>();
 builder.Services.AddScoped<IReparationService, ReparationService>();
-
+builder.Services.AddScoped<IVenteService, VenteService>();
 
 var app = builder.Build();
 

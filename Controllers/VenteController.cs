@@ -14,14 +14,12 @@ namespace ExpressVoituresApp.Controllers
             _venteService = venteService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var ventes = await _venteService.GetVentesAsync();
+            return View(ventes);
         }
 
-        public IActionResult create()
-        {
-            return View();
-        }
     }
 }

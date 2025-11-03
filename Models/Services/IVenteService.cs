@@ -1,5 +1,4 @@
 ﻿using ExpressVoituresApp.Models.Entities;
-using ExpressVoituresApp.Models.Repositories;
 
 namespace ExpressVoituresApp.Models.Services
 {
@@ -7,5 +6,7 @@ namespace ExpressVoituresApp.Models.Services
     {
         Task AddVenteAsync(Vente vente);
         Task<IEnumerable<Vente?>> GetVentesAsync();
+        Task<Vente?> GetVenteByVehiculeIdAsync(int vehiculeId);
+
     }
 }

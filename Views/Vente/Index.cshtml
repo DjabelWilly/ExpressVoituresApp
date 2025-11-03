@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ExpressVoituresApp.Models.Entities.Vente>
+
+@{
+    ViewData["Title"] = "Ventes";
+}
+
+<h1 class="mb-3">Liste des ventes</h1>
+
+
+@if (!Model.Any())
+{
+    <div class="alert text-center">
+        Aucune vente enregistrée pour le moment.
+    </div>
+}
+else
+{
+    <div class="container-fluid">
+        @foreach (var item in Model)
+        {
+            <div class="d-flex mb-3">
+                <p class="m-2">@item.Date.ToString("dd/MM/yyyy") :</p>
+                <p class="m-2"> @item.Vehicule?.Marque @item.Vehicule?.Modele (@item.Vehicule?.Annee) </p>
+                <p class="m-2"> @item.Prix €</p>
+            </div>
+        }
+    </div>
+}

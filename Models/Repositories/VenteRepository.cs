@@ -1,6 +1,5 @@
 ﻿using ExpressVoituresApp.Data;
 using ExpressVoituresApp.Models.Entities;
-using ExpressVoituresApp.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpressVoituresApp.Models.Repositories
@@ -24,7 +23,14 @@ namespace ExpressVoituresApp.Models.Repositories
         {
             return await _context.Ventes
                 .Include(v => v.Vehicule)
+                .OrderByDescending(v => v.Date)
                 .ToListAsync();
+        }
+
+        public async Task<Vente?> GetVenteByVehiculeIdAsync(int vehiculeId)
+        {
+            return await _context.Ventes
+                .FirstOrDefaultAsync(v => v.VehiculeId == vehiculeId);
         }
 
     }

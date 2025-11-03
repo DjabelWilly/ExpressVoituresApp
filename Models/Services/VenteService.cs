@@ -1,13 +1,14 @@
 ﻿using ExpressVoituresApp.Models.Entities;
+using ExpressVoituresApp.Models.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpressVoituresApp.Models.Services
 {
     public class VenteService : IVenteService
-
     {
-        private readonly IVenteService _venteRepository;
+        private readonly IVenteRepository _venteRepository;
 
-        public VenteService(IVenteService venteRepository)
+        public VenteService(IVenteRepository venteRepository)
         {
             _venteRepository = venteRepository;
         }
@@ -21,6 +22,13 @@ namespace ExpressVoituresApp.Models.Services
         {
             return await _venteRepository.GetVentesAsync();
         }
+
+        public async Task<Vente?> GetVenteByVehiculeIdAsync(int vehiculeId)
+        {
+            return await _venteRepository.GetVenteByVehiculeIdAsync(vehiculeId);
+
+        }
     }
 }
+
 

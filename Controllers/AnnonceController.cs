@@ -13,18 +13,21 @@ namespace ExpressVoituresApp.Controllers
         private readonly IVehiculeService _vehiculeService;
         private readonly IReparationService _reparationService;
         private readonly IAchatService _achatService;
+        private readonly IVenteService _venteService;
 
         public AnnonceController(
             IAnnonceService annonceService,
             IVehiculeService vehiculeService,
             IReparationService reparationService,
-            IAchatService achatService
+            IAchatService achatService,
+            IVenteService venteService
             )
         {
             _annonceService = annonceService;
             _vehiculeService = vehiculeService;
             _reparationService = reparationService;
             _achatService = achatService;
+            _venteService = venteService;
         }
 
         // ==========================
@@ -204,7 +207,15 @@ namespace ExpressVoituresApp.Controllers
             annonce.Statut = model.Statut;
             annonce.Prix = model.Prix;
 
-            await _annonceService.UpdateAnnonceAsync(annonce);
+            if (model.Statut == "VENDU")
+            {
+                await _annonceService.MarkAsSoldAsync(model.Id);
+            }
+            else
+            {
+                await _annonceService.UpdateAnnonceAsync(annonce);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

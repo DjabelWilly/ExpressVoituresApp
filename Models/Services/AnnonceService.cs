@@ -6,10 +6,12 @@ namespace ExpressVoituresApp.Models.Services
     public class AnnonceService : IAnnonceService
     {
         private readonly IAnnonceRepository _annonceRepository;
+        private readonly IVenteService _venteService;
 
-        public AnnonceService(IAnnonceRepository annonceRepository)
+        public AnnonceService(IAnnonceRepository annonceRepository, IVenteService venteService)
         {
             _annonceRepository = annonceRepository;
+            _venteService = venteService;
         }
 
         public async Task<IEnumerable<Annonce>> GetAnnoncesDisponiblesAsync()
@@ -35,10 +37,25 @@ namespace ExpressVoituresApp.Models.Services
             if (annonce == null)
                 throw new KeyNotFoundException($"Annonce {id} introuvable.");
 
+            // Vérifier si une vente existe déjà pour ce véhicule
+            var existingVente = await _venteService.GetVenteByVehiculeIdAsync(annonce.VehiculeId);
+            if (existingVente != null)
+                return; // Vente déjà enregistrée, ne rien faire
+
+            // Mettre l'annonce en statut "VENDU"
             annonce.Statut = "VENDU";
             await _annonceRepository.UpdateAnnonceAsync(annonce);
             await _annonceRepository.SaveChangesAsync();
+
+            // Ajouter la vente
+            await _venteService.AddVenteAsync(new Vente
+            {
+                VehiculeId = annonce.VehiculeId,
+                Date = DateTime.Now,
+                Prix = annonce.Prix
+            });
         }
+
 
         public async Task UpdateAnnonceAsync(Annonce annonce)
         {
