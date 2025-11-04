@@ -6,7 +6,7 @@
 
 <h1>Voulez-vous supprimer cette annonce ?</h1>
 
-<div class="row row-cols-1">
+<div class="container-fluid">
     <div class="col">
         <div class="card h-100 mt-3">
             <div class="row g-0 h-100">
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<form asp-action="Delete" method="post">
+<form asp-action="Delete" method="post" class="px-3">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger mt-4">Confirmer la suppression</button>
     <a asp-action="Index" class="btn btn-secondary mt-4">Annuler</a>

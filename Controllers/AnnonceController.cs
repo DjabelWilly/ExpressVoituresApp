@@ -34,7 +34,7 @@ namespace ExpressVoituresApp.Controllers
         // VISITEURS PUBLICS
         // ==========================
 
-        //----------------READ----------------//
+        //----------------READ----------------
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
@@ -85,7 +85,7 @@ namespace ExpressVoituresApp.Controllers
         }
 
 
-        //-------------CREATE--------------//
+        //-------------CREATE--------------
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -140,7 +140,7 @@ namespace ExpressVoituresApp.Controllers
         }
 
 
-        //-------------UPDATE--------------//
+        //-------------UPDATE--------------
 
         // Récupère l'annonce à modifier
         [Authorize]
@@ -216,11 +216,13 @@ namespace ExpressVoituresApp.Controllers
                 await _annonceService.UpdateAnnonceAsync(annonce);
             }
 
-            return RedirectToAction(nameof(Index));
+            TempData["SuccessMessage"] = "Enregistrement vente réussi !";
+
+            return RedirectToAction("Index", "Vente");
         }
 
 
-        //----------------DELETE-------------------//
+        //----------------DELETE-------------------
 
         // Récupère une annonce et la supprime
         [Authorize]

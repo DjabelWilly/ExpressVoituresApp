@@ -37,17 +37,17 @@ namespace ExpressVoituresApp.Models.Services
             if (annonce == null)
                 throw new KeyNotFoundException($"Annonce {id} introuvable.");
 
-            // Vérifier si une vente existe déjà pour ce véhicule
+            // Vérifie si une vente existe déjà pour ce véhicule
             var existingVente = await _venteService.GetVenteByVehiculeIdAsync(annonce.VehiculeId);
             if (existingVente != null)
                 return; // Vente déjà enregistrée, ne rien faire
 
-            // Mettre l'annonce en statut "VENDU"
+            // Change l'annonce en statut "VENDU"
             annonce.Statut = "VENDU";
             await _annonceRepository.UpdateAnnonceAsync(annonce);
             await _annonceRepository.SaveChangesAsync();
 
-            // Ajouter la vente
+            // Ajoute la vente
             await _venteService.AddVenteAsync(new Vente
             {
                 VehiculeId = annonce.VehiculeId,

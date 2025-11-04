@@ -6,7 +6,6 @@
 
 <h1 class="mb-3">Liste des ventes</h1>
 
-
 @if (!Model.Any())
 {
     <div class="alert text-center">
@@ -16,13 +15,47 @@
 else
 {
     <div class="container-fluid">
-        @foreach (var item in Model)
-        {
-            <div class="d-flex mb-3">
-                <p class="m-2">@item.Date.ToString("dd/MM/yyyy") :</p>
-                <p class="m-2"> @item.Vehicule?.Marque @item.Vehicule?.Modele (@item.Vehicule?.Annee) </p>
-                <p class="m-2"> @item.Prix €</p>
-            </div>
-        }
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Véhicule</th>
+                    <th>Année</th>
+                    <th>Prix (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Vehicule?.Marque @item.Vehicule?.Modele</td>
+                        <td>@item.Vehicule?.Annee</td>
+                        <td>@item.Prix.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 }
+
+@* message de succès après enregistrement de la vente d'un véhicule *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="flashMessage" class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<script>
+    // Supprime le message après 3 secondes
+    const flash = document.getElementById("flashMessage");
+    if(flash) {
+        setTimeout(() => {
+            flash.style.transition = "opacity 0.5s ease";
+            flash.style.opacity = "0";
+            setTimeout(() => flash.remove(), 500);
+        }, 3000);
+    }
+</script>

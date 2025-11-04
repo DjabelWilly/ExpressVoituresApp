@@ -19,6 +19,7 @@ namespace ExpressVoituresApp.Models.Repositories
             return await _context.Vehicules
                 .Include(v => v.Achat)
                 .Include(v => v.Annonce)
+                .Include(v => v.Vente)
                 .Include(v => v.Reparations)
                 .Select(v => new VehiculeAchatViewModel
                 {
@@ -46,6 +47,13 @@ namespace ExpressVoituresApp.Models.Repositories
                         Statut = v.Annonce.Statut,
                         Prix = v.Annonce.Prix
                     } : null!,
+
+                    Vente = v.Vente != null ? new VenteViewModel
+                    {
+                        Id = v.Vente.Id,
+                        Date = v.Vente.Date,
+                        Prix = v.Vente.Prix
+                    } : null,
 
                     TotalReparations = v.Reparations.Sum(r => r.Cout)
                 })
