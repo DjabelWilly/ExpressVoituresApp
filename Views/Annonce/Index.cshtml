@@ -36,11 +36,11 @@ else
                         <div class="col-md-7 d-flex flex-column">
                             <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none text-dark flex-grow-1">
                                 <div class="card-body ps-3 pe-2 py-2">
-                                    <p class="mb-0">@item.Prix €</p>
-                                    <p class="mb-1">@item.Vehicule?.Annee</p>
-                                    <p class="mb-1">@item.Vehicule?.Marque</p>
-                                    <p class="mb-1">@item.Vehicule?.Modele</p>
-                                    <p class="mb-1">@item.Vehicule?.Finition</p>
+                                    <p class="mb-0"><strong>Prix : </strong> @item.Prix €</p>
+                                    <p class="mb-1"><strong>Année : </strong> @item.Vehicule?.Annee</p>
+                                    <p class="mb-1"><strong>Marque : </strong> @item.Vehicule?.Marque</p>
+                                    <p class="mb-1"> <strong>Modèle : </strong>  @item.Vehicule?.Modele  @item.Vehicule?.Finition</p>
+                                    <p class="mb-1 text-muted fst-italic">publiée le : @item.DatePublication.ToString("dd/MM/yyyy")</p>
                                 </div>
                             </a>
 

@@ -17,6 +17,8 @@ namespace ExpressVoituresApp.Models.Entities
 
         public int Prix { get; set; }
 
+        public DateTime DatePublication { get; set; }
+
         // FK
         public int VehiculeId { get; set; }
         public Vehicule? Vehicule { get; set; }

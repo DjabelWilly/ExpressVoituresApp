@@ -45,7 +45,8 @@ namespace ExpressVoituresApp.Models.Repositories
                         Titre = v.Annonce.Titre,
                         Description = v.Annonce.Description,
                         Statut = v.Annonce.Statut,
-                        Prix = v.Annonce.Prix
+                        Prix = v.Annonce.Prix,
+                        DatePublication = v.Annonce.DatePublication
                     } : null!,
 
                     Vente = v.Vente != null ? new VenteViewModel

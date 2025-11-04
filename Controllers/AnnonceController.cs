@@ -120,16 +120,15 @@ namespace ExpressVoituresApp.Controllers
             var achat = await _achatService.GetAchatByVehiculeIdAsync(model.VehiculeId);
             if (achat == null) return View(model);
 
-            var prixAchat = achat.Prix;
             decimal? coutReparations = await _reparationService.GetReparationTotalByVehiculeIdAsync(model.VehiculeId);
 
-            var prixVente = prixAchat + coutReparations + 500;
+            var prixVente = achat.Prix + coutReparations + 500;
 
             var annonce = new Annonce
             {
                 Titre = model.Titre,
                 Description = model.Description,
-                Photo = photoPath, // <-- enregistre le chemin relatif
+                Photo = photoPath,
                 Statut = "DISPONIBLE",
                 Prix = (int)prixVente,
                 VehiculeId = model.VehiculeId
@@ -138,7 +137,6 @@ namespace ExpressVoituresApp.Controllers
             await _annonceService.PublishAnnonceAsync(annonce);
             return RedirectToAction(nameof(Index));
         }
-
 
         //-------------UPDATE--------------
 
@@ -157,6 +155,7 @@ namespace ExpressVoituresApp.Controllers
                 Photo = annonce.Photo,
                 Statut = annonce.Statut,
                 Prix = annonce.Prix,
+                DatePublication = annonce.DatePublication,
                 VehiculeId = annonce.VehiculeId
             };
 
@@ -206,7 +205,9 @@ namespace ExpressVoituresApp.Controllers
             annonce.Description = model.Description;
             annonce.Statut = model.Statut;
             annonce.Prix = model.Prix;
+            annonce.DatePublication = model.DatePublication;
 
+            // statut == 'vendu', on crée une vente
             if (model.Statut == "VENDU")
             {
                 await _annonceService.MarkAsSoldAsync(model.Id);

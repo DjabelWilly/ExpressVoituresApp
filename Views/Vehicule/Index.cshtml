@@ -16,10 +16,11 @@
             <th>Année</th>
             <th>Date Achat</th>
             <th>Prix Achat</th>
-            <th>Réparations</th>
+            <th>Montant réparations</th>
+            <th>Annonce publiée</th>
             <th>Prix Vente</th>
             <th>Date Vente</th>
-            <th>Statut</th>
+            <th>Statut annonce</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,7 @@
                 <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
                 <td>@v.Achat?.Prix</td>
                 <td>@v.TotalReparations</td>
+                <td>@v.Annonce?.DatePublication.ToString("dd/MM/yyyy")</td>
                 <td>@v.Annonce?.Prix</td>
                 <td>@v.Vente?.Date.ToString("dd/MM/yyyy")</td>
                 <td>

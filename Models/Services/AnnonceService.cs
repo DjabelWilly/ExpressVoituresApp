@@ -27,8 +27,8 @@ namespace ExpressVoituresApp.Models.Services
         public async Task PublishAnnonceAsync(Annonce annonce)
         {
             annonce.Statut = "DISPONIBLE";
+            annonce.DatePublication = DateTime.Now;
             await _annonceRepository.AddAnnonceAsync(annonce);
-            await _annonceRepository.SaveChangesAsync();
         }
 
         public async Task MarkAsSoldAsync(int id)

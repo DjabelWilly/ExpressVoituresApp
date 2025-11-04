@@ -7,6 +7,8 @@ namespace ExpressVoituresApp.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Le code VIN est requis")]
+        [StringLength(17, MinimumLength = 17, ErrorMessage = "Le code VIN doit contenir 17 caractères.")]
+        [RegularExpression("^[A-Za-z0-9]*$", ErrorMessage = "Le code VIN ne doit contenir que des lettres et des chiffres.")]
         public required string CodeVin { get; set; }
 
         [Required(ErrorMessage = "La marque est requise")]

@@ -21,6 +21,8 @@ namespace ExpressVoituresApp.Models
 
         public int Prix { get; set; }
 
+        public DateTime DatePublication { get; set; }
+
         [Required(ErrorMessage = "Un véhicule est requis")]
         public int VehiculeId { get; set; }
 
