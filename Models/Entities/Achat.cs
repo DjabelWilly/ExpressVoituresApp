@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace ExpressVoituresApp.Models.Entities
+﻿namespace ExpressVoituresApp.Models.Entities
 {
     public class Achat
     {

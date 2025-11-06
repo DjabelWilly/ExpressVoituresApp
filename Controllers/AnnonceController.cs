@@ -138,9 +138,10 @@ namespace ExpressVoituresApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //-------------UPDATE--------------
+        //------------- EDIT --------------
 
-        // Récupère l'annonce à modifier
+        // Récupère en base l'annonce à modifier
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
@@ -205,8 +206,7 @@ namespace ExpressVoituresApp.Controllers
             annonce.Description = model.Description;
             annonce.Statut = model.Statut;
             annonce.Prix = model.Prix;
-            annonce.DatePublication = model.DatePublication;
-
+     
             // statut == 'vendu', on crée une vente
             if (model.Statut == "VENDU")
             {
@@ -219,7 +219,7 @@ namespace ExpressVoituresApp.Controllers
 
             TempData["SuccessMessage"] = "Enregistrement vente réussi !";
 
-            return RedirectToAction("Index", "Vente");
+            return RedirectToAction("Index", "Vehicule");
         }
 
 

@@ -28,14 +28,12 @@
 
                 <div class="col-md-8 d-flex flex-column">
                     <div class="card-body">
-                        <h4 class="text-end">@Model.Prix €</h4>
-                        <h5 class="card-title">@Model.Titre</h5>
+                        <h5>Prix : @Model.Prix €</h5>
+                        <h5>@Model.Titre</h5>
                         <p class="card-text text-truncate">@Model.Description</p>
-                        <p>@Model.Vehicule?.Annee</p>
-                        <p>@Model.Vehicule?.Marque</p>
-                        <p>@Model.Vehicule?.Modele</p>
-                        <p>@Model.Vehicule?.Finition</p>
-
+                        <p>Année : @Model.Vehicule?.Annee</p>
+                        <p>Marque : @Model.Vehicule?.Marque</p>
+                        <p>Modèle : @Model.Vehicule?.Modele @Model.Vehicule?.Finition</p>
                     </div>
                 </div>
             </div>

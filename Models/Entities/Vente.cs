@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-
-namespace ExpressVoituresApp.Models.Entities
+﻿namespace ExpressVoituresApp.Models.Entities
 {
     public class Vente
     {

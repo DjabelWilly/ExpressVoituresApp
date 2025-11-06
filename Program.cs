@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Charge le fichier .env
 Env.Load();
 
-// --- Connexion � la base ---
+// --- Connexion à la base ---
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// --- Configuration Identity + r�les ---
+// --- Configuration Identity + roles ---
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;

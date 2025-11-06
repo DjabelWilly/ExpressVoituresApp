@@ -1,6 +1,5 @@
 ﻿using ExpressVoituresApp.Models.Entities;
 using ExpressVoituresApp.Models.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace ExpressVoituresApp.Models.Services
 {

@@ -9,15 +9,15 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Code VIN</th>
-            <th>Marque</th>
-            <th>Modèle</th>
-            <th>Finition</th>
+            <th class="ps-0">Code VIN</th>
+            <th class="ps-0 pe-2">Marque</th>
+            <th class="ps-0 pe-2">Modèle</th>
+            <th class="ps-0 pe-1">Finition</th>
             <th>Année</th>
             <th>Date Achat</th>
             <th>Prix Achat</th>
-            <th>Montant réparations</th>
-            <th>Annonce publiée</th>
+            <th class="px-0">Montant réparations</th>
+            <th class="px-0">Annonce publiée</th>
             <th>Prix Vente</th>
             <th>Date Vente</th>
             <th>Statut annonce</th>
@@ -27,15 +27,15 @@
         @foreach (var v in Model)
         {
             <tr>
-                <td>@v.Vehicule.CodeVin</td>
-                <td>@v.Vehicule.Marque</td>
-                <td>@v.Vehicule.Modele</td>
-                <td>@v.Vehicule.Finition</td>
+                <td class="ps-0">@v.Vehicule.CodeVin</td>
+                <td class ="px-0">@v.Vehicule.Marque</td>
+                <td class="px-0">@v.Vehicule.Modele</td>
+                <td class="px-0">@v.Vehicule.Finition</td>
                 <td>@v.Vehicule.Annee</td>
                 <td>@v.Achat?.Date.ToString("dd/MM/yyyy")</td>
                 <td>@v.Achat?.Prix</td>
-                <td>@v.TotalReparations</td>
-                <td>@v.Annonce?.DatePublication.ToString("dd/MM/yyyy")</td>
+                <td class="px-0">@v.TotalReparations</td>
+                <td class="px-0">@v.Annonce?.DatePublication.ToString("dd/MM/yyyy")</td>
                 <td>@v.Annonce?.Prix</td>
                 <td>@v.Vente?.Date.ToString("dd/MM/yyyy")</td>
                 <td>

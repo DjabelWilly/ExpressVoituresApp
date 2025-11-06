@@ -23,7 +23,6 @@ namespace ExpressVoituresApp.Models
 
         public DateTime DatePublication { get; set; }
 
-        [Required(ErrorMessage = "Un véhicule est requis")]
         public int VehiculeId { get; set; }
 
         // Liste pour le menu déroulant

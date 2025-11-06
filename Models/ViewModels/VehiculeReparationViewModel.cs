@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-
-namespace ExpressVoituresApp.Models
+﻿namespace ExpressVoituresApp.Models
 {
     public class VehiculeReparationViewModel
     {

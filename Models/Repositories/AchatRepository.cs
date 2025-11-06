@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using ExpressVoituresApp.Data;
+﻿using ExpressVoituresApp.Data;
 using ExpressVoituresApp.Models.Entities;
 using ExpressVoituresApp.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;

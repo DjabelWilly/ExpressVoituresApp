@@ -1,5 +1,4 @@
 ﻿using ExpressVoituresApp.Models;
-using ExpressVoituresApp.Models.Entities;
 using ExpressVoituresApp.Models.Services;
 using ExpressVoituresApp.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;

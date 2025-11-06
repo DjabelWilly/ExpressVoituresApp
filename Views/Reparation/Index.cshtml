@@ -23,7 +23,7 @@ else
     <div class="container-fluid">
         @foreach (var item in Model)
         {
-            <div class="d-flex mb-3">
+            <div class="d-flex">
                 <h5 class="card-title">@item.Vehicule?.Marque @item.Vehicule?.Modele (@item.Vehicule?.Annee) :</h5>
                 <p class="ms-2">@item.Reparation.Description</p>
                 <p class="ms-2"> @item.Reparation.Cout €</p>
