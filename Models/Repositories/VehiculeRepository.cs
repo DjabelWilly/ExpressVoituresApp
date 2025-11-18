@@ -98,6 +98,7 @@ namespace ExpressVoituresApp.Models.Repositories
         {
             var vehicule = await _context.Vehicules.FindAsync(id);
 
+            if (vehicule != null)
             _context.Vehicules.Remove(vehicule);
             await _context.SaveChangesAsync();
         }
