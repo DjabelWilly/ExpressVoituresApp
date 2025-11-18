@@ -1,9 +1,10 @@
 using DotNetEnv;
 using ExpressVoituresApp.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using ExpressVoituresApp.Models.Repositories;
 using ExpressVoituresApp.Models.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
